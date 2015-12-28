@@ -14,7 +14,7 @@ Look in the examples folder for basic examples of how to use the code.
 Using [composer](https://packagist.org/packages/redbox/twitch):
 
 ```bash
-$ composer require redbox/cli
+$ composer require redbox/twitch
 ```
 ## Requirements
 

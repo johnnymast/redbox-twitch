@@ -1,6 +1,7 @@
 <?php
 namespace Redbox\Twitch;
 use Redbox\Twitch\Transport;
+use Redbox\Twitch\Commands;
 
 class Client
 {
@@ -81,6 +82,25 @@ class Client
     public function getClientSecret()
     {
         return $this->client_secret;
+    }
+
+    public function getTopGames()
+    {
+        return $this->sendCommand(
+            new Commands\GetTopGames
+        );
+    }
+
+    /**
+     * Send command to server
+     *
+     * @param CommandInterface $command Phue command
+     *
+     * @return mixed Command result
+     */
+    public function sendCommand(Commands\CommandInterface $command)
+    {
+        return $command->send($this);
     }
 
     /**
