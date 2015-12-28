@@ -3,7 +3,7 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/johnnymast/redbox-cli/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/johnnymast/redbox-cli/?branch=master)
 
 
-# redbox-twitch
+# redbox-twitch is not ready!
 ...
 
 ## Howto use it
