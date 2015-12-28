@@ -15,6 +15,4 @@ class Scope
     const USER_SUBSCRIPTIONS         = 'user_subscriptions';
     const CHANNEL_CHECK_SUBSCRIPTION = 'channel_check_subscription';
     const CHAT_LOGIN                 = 'chat_login';
-
-
 }
