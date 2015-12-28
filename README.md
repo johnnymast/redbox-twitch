@@ -4,8 +4,7 @@
 
 
 # redbox-twitch
-This is a command line parser based on [Climate](https://github.com/thephpleague/climate)  by [Joe Tannenbaum](https://github.com/joetannenbaum). We share a lot of similarities but i desided to take the getopt route and downgrade the number of lines in the code by 1/4 of the original code.
-
+...
 
 ## Howto use it
 Look in the examples folder for basic examples of how to use the code.
