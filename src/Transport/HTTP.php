@@ -2,7 +2,7 @@
 namespace Redbox\Twitch\Transport;
 use Redbox\Twitch\Transport\Adapter\Curl as DefaultAdapter;
 use Redbox\Twitch\Transport\Adapter;
-use Redbox\Twitch;
+use Redbox\Twitch\Client;
 
 class Http implements TransportInterface
 {
@@ -57,7 +57,27 @@ class Http implements TransportInterface
     /* -- Getters -- */
 
 
-    public function sendRequest($path, $method = self::METHOD_GET, \stdClass $data = null) {
+    public function sendRequest($path, $method = self::METHOD_GET, \stdClass $data = null)
+    {
+        if (!$this->client) {
+            // Throw
+        }
 
+
+        $url = sprintf('%s/%s', $this->client->getApiUrl(), $path);
+
+        $this->getAdapter()->open();
+
+        $data = $this->getAdapter()->send($url, $method, $data);
+
+        if ($this->getAdapter()->getHttpStatusCode() == 200) {
+            return json_decode($data);
+        }
+
+
+        $this->getAdapter()->close();
+
+        print '<pre>';
+        print_r($data);
     }
 }

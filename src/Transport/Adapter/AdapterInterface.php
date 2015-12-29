@@ -6,29 +6,24 @@ interface AdapterInterface
 {
 
     /**
-     * AdapterInterface constructor.
-     * @param Client $client
-     */
-    public function __construct(Client $client);
-
-    /**
      * Since PSR-4 does not allow constructors to throw exceptions
      * we need to get creative. Every Adapter needs to verify that it can
      * be used.
      *
-     * @return mixed
+     * @throws BadFunctionCallException
+     * @return bool
      */
     public function verifySupport();
 
     /**
      * @return mixed
      */
-    public function connect();
+    public function open();
 
     /**
      * @return mixed
      */
-    public function disconnect();
+    public function close();
 
     /**
      * @param $address

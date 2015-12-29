@@ -4,22 +4,17 @@ use Redbox\Twitch\Client;
 
 class Stream implements AdapterInterface
 {
-    public function __construct(Client $client)
-    {
-
-    }
-
     public function verifySupport()
     {
         // TODO: Implement verifySupport() method.
     }
 
-    public function connect()
+    public function open()
     {
         // TODO: Implement connect() method.
     }
 
-    public function disconnect()
+    public function close()
     {
         // TODO: Implement disconnect() method.
     }

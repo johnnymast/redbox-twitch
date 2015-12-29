@@ -1,6 +1,7 @@
 <?php
 namespace Redbox\Twitch;
-use Redbox\Twitch\Transport;
+use Redbox\Twitch\Transport\TransportInterface;
+use Redbox\Twitch\Transport\Http;
 use Redbox\Twitch\Commands;
 
 class Client
@@ -26,15 +27,18 @@ class Client
      */
     protected $client_secret;
 
+    /**
+     * @var string
+     */
+    protected $api_url;
+
 
     public function __construct()
     {
-        /*
-        $this->_client->setClientId(config_item('twitch_client_id'));
-        $this->_client->setRedirectUri(config_item('twitch_redirect_uri'));
-        $this->_client->setClientSecret(config_item('twitch_client_secret'));
-        */
+        $this->setApiUrl('https://api.twitch.tv/kraken');
     }
+
+    /* -- Setters */
 
     /**
      * @param string $client_id
@@ -61,6 +65,16 @@ class Client
     }
 
     /**
+     * @param string $api_url
+     */
+    public function setApiUrl($api_url)
+    {
+        $this->api_url = $api_url;
+    }
+
+    /* -- Getters  */
+
+    /**
      * @return string
      */
     public function getClientId()
@@ -84,10 +98,28 @@ class Client
         return $this->client_secret;
     }
 
+    /**
+     * @return string
+     */
+    public function getApiUrl()
+    {
+        return $this->api_url;
+    }
+
+
+    /*  -- Commands -- */
+
     public function getTopGames()
     {
         return $this->sendCommand(
             new Commands\GetTopGames
+        );
+    }
+
+    public function getToken()
+    {
+        return $this->sendCommand(
+            new Commands\getToken
         );
     }
 
