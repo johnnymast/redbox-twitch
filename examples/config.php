@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 /*
 |--------------------------------------------------------------------------
@@ -6,12 +7,11 @@
 |--------------------------------------------------------------------------
 |
 | Before you configuration make sure you register your application at
-| Typically this will be your index.php file, unless you've renamed it to
-| something else. If you are using mod_rewrite to remove the page set this
-| variable so that it is blank.
+| http://www.twitch.tv/kraken/oauth2/clients/new.
 |
+| It wil provide you with the information that you will need in this file.
 */
 $config['twitch_client_id']     = '';
 $config['twitch_client_secret'] = '';
-$config['twitch_redirect_uri']  = '';
+$config['twitch_redirect_uri']  = 'http://localhost/examples/authorize-returning-user.php';
 $config['twitch_force_login']   = true;
