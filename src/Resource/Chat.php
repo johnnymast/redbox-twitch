@@ -32,6 +32,7 @@ class Chat extends ResourceAbstract
     public function getEmoticons($args = array())
     {
         // TODO Not done
+        $args;
         throw new Exception\RuntimeException('Not implemented do to 504 on twitch API.');
     }
 
