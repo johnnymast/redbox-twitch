@@ -1,6 +1,6 @@
 <?php
 namespace Redbox\Twitch\Transport\Adapter;
-use Redbox\Twitch\Client;
+use Redbox\Twitch;
 
 interface AdapterInterface
 {
