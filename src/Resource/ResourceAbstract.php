@@ -12,7 +12,7 @@ class ResourceAbstract
     private $methods;
 
     /**
-     * @var Client
+     * @var Twitch\Client
      */
     private $client;
 
