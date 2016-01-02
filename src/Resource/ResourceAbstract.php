@@ -30,7 +30,7 @@ class ResourceAbstract
     /**
      * ResourceAbstract constructor.
      *
-     * @param Client|null $client
+     * @param Client $client
      * @param string $resource_name
      * @param array $declaration
      */
