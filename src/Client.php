@@ -413,7 +413,7 @@ class Client
 
 
     /**
-     * @param $api_url
+     * @param string $api_url
      * @return $this
      */
     public function setApiUrl($api_url)
