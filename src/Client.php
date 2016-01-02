@@ -56,7 +56,7 @@ class Client
     public $auth;
 
     /**
-     * @var Resource\Game
+     * @var Resource\Games
      */
     public $games;
 

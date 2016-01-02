@@ -58,7 +58,7 @@ class ResourceAbstract
     {
         if (isset($this->methods[$method_name]) === true) {
             $method = $this->methods[$method_name];
-            if (isset($method['parameters']) === true and is_array($method['parameters']) == true) {
+            if (isset($method['parameters']) === true and is_array($method['parameters']) === true) {
                 $parameters = $method['parameters'];
                 foreach ($parameters as $name => $options) {
                     switch ($options['type']) {
