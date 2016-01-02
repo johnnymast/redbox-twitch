@@ -103,7 +103,7 @@ class ResourceAbstract
     /**
      * Call and process the 'virtual' method as defined in Client.php
      *
-     * @param $method
+     * @param string $method
      * @param array $arguments
      * @param array $body
      * @return mixed
@@ -163,7 +163,7 @@ class ResourceAbstract
     }
 
     /**
-     * @return null|Client
+     * @return Client
      */
     public function getClient() {
         return $this->client;
