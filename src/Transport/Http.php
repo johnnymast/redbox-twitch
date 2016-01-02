@@ -1,9 +1,9 @@
 <?php
 namespace Redbox\Twitch\Transport;
-use Redbox\Twitch\Exception;
-use Redbox\Twitch\Transport\Adapter\Curl as DefaultAdapter;
-use Redbox\Twitch\Transport\Adapter;
 use Redbox\Twitch\Client;
+use Redbox\Twitch\Exception;
+use Redbox\Twitch\Transport\Adapter;
+use Redbox\Twitch\Transport\Adapter\Curl as DefaultAdapter;
 
 class Http implements TransportInterface
 {
