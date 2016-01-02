@@ -28,7 +28,13 @@ class ResourceAbstract
     private $url_parts = array();
 
 
-
+    /**
+     * ResourceAbstract constructor.
+     *
+     * @param Client|null $client
+     * @param string $resource_name
+     * @param array $declaration
+     */
     public function __construct(Client $client = null, $resource_name = "", $declaration = [])
     {
         $this->client        = $client;
@@ -40,6 +46,14 @@ class ResourceAbstract
         // Todo validate resources
     }
 
+    /**
+     * Validate arguments given for a 'virtual' method.
+     *
+     * @param string $method_name
+     * @param array $args
+     * @return bool
+     * @throws Exception\RuntimeException
+     */
     private function validate_arguments($method_name = '', $args = array())
     {
         if (isset($this->methods[$method_name]) === true) {
@@ -70,6 +84,8 @@ class ResourceAbstract
                             if (isset($options['required']) === true and $options['required'] === true and isset($args[$name]) === false)
                                 throw new Exception\RuntimeException($this->resource_name . ' requires parameter ' . $name . ' to be given for method ' . $method);
 
+                            // todo add validator for restricted_value
+
                             // Url Part
                             if (isset($options['url_part']) === true and $options['url_part'] === true and isset($args[$name]) === false) {
                                 throw new Exception\RuntimeException($this->resource_name . ' requires parameter ' . $name . ' to be given for method ' . $method);
@@ -84,6 +100,16 @@ class ResourceAbstract
         return true;
     }
 
+    /**
+     * Call and process the 'virtual' method as defined in Client.php
+     *
+     * @param $method
+     * @param array $arguments
+     * @param array $body
+     * @return mixed
+     * @throws Exception\AuthorizationRequiredException
+     * @throws Exception\RuntimeException
+     */
     public function call($method, $arguments = array(), $body = array())
     {
         if ($this->validate_arguments($method, $arguments) == true)
@@ -136,14 +162,23 @@ class ResourceAbstract
         }
     }
 
+    /**
+     * @return null|Client
+     */
     public function getClient() {
         return $this->client;
     }
 
+    /**
+     * @return string
+     */
     public function getResourceName() {
         return $this->resource_name;
     }
 
+    /**
+     * @return array
+     */
     public function getMethods() {
         return $this->methods;
     }
