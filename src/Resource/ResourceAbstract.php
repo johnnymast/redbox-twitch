@@ -30,12 +30,13 @@ class ResourceAbstract
     /**
      * ResourceAbstract constructor.
      *
-     * @param Client $client
+     * @param \Redbox\Twitch\Client $client
      * @param string $resource_name
      * @param array $declaration
      */
     public function __construct(Client $client = null, $resource_name = "", $declaration = [])
     {
+        // TODO = null has to go .. also we need to validate we have $client
         $this->client        = $client;
         $this->resource_name = $resource_name;
         $this->methods       = isset($declaration['methods']) ? $declaration['methods'] : [];
