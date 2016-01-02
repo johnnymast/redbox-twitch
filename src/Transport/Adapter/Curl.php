@@ -72,7 +72,7 @@ class Curl implements AdapterInterface
         curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, $method);
         curl_setopt($this->curl, CURLOPT_HEADER, false);
         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($this->curl, CURLOPT_VERBOSE, true);
+        curl_setopt($this->curl, CURLOPT_VERBOSE, false);
 
         if (is_array($headers)) {
             $curlHeaders = array();

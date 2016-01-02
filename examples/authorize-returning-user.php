@@ -10,7 +10,7 @@ try {
 
     echo '<h1>Welcome back</h1>';
 
-    if (isset($_GET['code']) == true and isset($_GET['state']) == true)
+    if (isset($_GET['code']) === true and isset($_GET['state']) === true)
     {
         $code  = htmlentities($_GET['code']);
         $state = htmlentities($_GET['state']);
@@ -33,7 +33,7 @@ try {
         }
 
     } else {
-        if (isset($_SESSION['access_token']) == true) {
+        if (isset($_SESSION['access_token']) === true) {
             echo 'It looks like it all worked out. <a href="get-root.php">Check how get-root looks like now</a> OR <a href="authorize-user.php">Check if your authenticated in authorize-user.php</a>';
         } else
         echo '<h1>Oops something went wrong</h1>';

@@ -8,7 +8,7 @@ try {
 
     $twitch = new Redbox\Twitch\Client();
 
-    if (isset($_SESSION['access_token']) == true) {
+    if (isset($_SESSION['access_token']) === true) {
         $twitch->setAccessToken($_SESSION['access_token']);
     }
 

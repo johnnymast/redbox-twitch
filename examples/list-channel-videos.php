@@ -10,7 +10,7 @@ use Redbox\Twitch;
 try {
 
     $channel_id = 'ign';
-    if (isset($_GET['id']) == true) {
+    if (isset($_GET['id']) === true) {
         $channel_id = htmlentities($_GET['id']);
     }
 

@@ -7,7 +7,7 @@ use Redbox\Twitch;
 try {
 
     $team = 'eg';
-    if (isset($_GET['team']) == true) {
+    if (isset($_GET['team']) === true) {
         $team = htmlentities($_GET['team']);
     }
 

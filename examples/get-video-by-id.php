@@ -7,7 +7,7 @@ use Redbox\Twitch;
 try {
 
     $video_id = 'v32560146';
-    if (isset($_GET['id']) == true) {
+    if (isset($_GET['id']) === true) {
         $video_id = htmlentities($_GET['id']);
     }
 

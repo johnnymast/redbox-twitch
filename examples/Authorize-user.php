@@ -11,7 +11,7 @@ $twitch->setClientId($config['twitch_client_id'])
        ->setRedirectUri($config['twitch_redirect_uri'])
        ->setForceRelogin($config['twitch_force_login']);
 
-if (isset($_SESSION['access_token']) == true) {
+if (isset($_SESSION['access_token']) === true) {
     $twitch->setAccessToken($_SESSION['access_token']);
 }
 

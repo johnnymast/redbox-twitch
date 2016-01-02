@@ -7,10 +7,6 @@ use Redbox\Twitch;
 try {
 
     $twitch = new Redbox\Twitch\Client();
-
-    if (isset($_SESSION['access_token']) == true) {
-        $twitch->setAccessToken($_SESSION['access_token']);
-    }
     $ingests = $twitch->ingests->get();
     ?>
     <style type="text/css">
