@@ -6,15 +6,15 @@ use Redbox\Twitch;
 
 try {
 
-    $channel_id = 'ign';
+    $set_id = 469;
     if (isset($_GET['id']) === true) {
-        $channel_id = htmlentities($_GET['id']);
+        $set_id = htmlentities($_GET['id']);
     }
 
     /* Return emoticons for emoticon set 469 */
     $twitch = new Redbox\Twitch\Client;
     $sets = $twitch->chat->getEmoticonSets(array(
-        'emotesets' => 469
+        'emotesets' => $set_id
     ));
 
     echo '<pre>';

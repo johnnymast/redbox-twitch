@@ -86,7 +86,7 @@ class Chat extends ResourceAbstract
         $response = $this->call('getEmoticonSets', $args);
 
         $emoticon_sets = new Twitch\ChatEmoticonImageSets;
-    print_r($emoticon_sets);
+
         if (is_object($response) === true && isset($response->emoticon_sets) === true) {
             $emoticon_sets->setEmoticonSets($response->emoticon_sets);
         }
