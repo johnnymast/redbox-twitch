@@ -40,6 +40,11 @@ class Client
      */
     protected $access_token;
 
+    /*
+     * @var string
+     */
+    protected $api_url;
+
     // --- NEW --
 
     /**
@@ -56,6 +61,16 @@ class Client
      * @var Resource\Root
      */
     public $root;
+
+    /**
+     * @var Resource\Teams
+     */
+    public $teams;
+
+    /**
+     * @var Resource\Videos
+     */
+    public $videos;
 
     /**
      * @var Resource\Ingests
@@ -386,7 +401,6 @@ class Client
         if ($this->transport === null) {
             $this->setTransport(new Http($this));
         }
-        if (!$this->transport) { echo '@@ERROR@@'; exit; }
         return $this->transport;
     }
 
