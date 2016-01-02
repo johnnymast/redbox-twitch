@@ -7,6 +7,8 @@ use Redbox\Twitch;
 /**
  * Please note: This method requires the user to be authenticated.
  */
+
+// TODO: not finisched we need to test the params
 try {
 
     $channel_id = 'ign';

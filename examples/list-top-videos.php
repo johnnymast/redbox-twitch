@@ -4,12 +4,14 @@ require 'config.php';
 
 use Redbox\Twitch;
 
+
 try {
 
     $twitch = new Redbox\Twitch\Client();
     $videos = $twitch->videos->listTopVideos();
 
     // TODO: add pagination ...
+    // TODO add support for arguments
 
     ?>
     <style type="text/css">

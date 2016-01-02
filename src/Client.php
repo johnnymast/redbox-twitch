@@ -101,6 +101,31 @@ class Client
                 )
             )
         );
+        $this->users = new Resource\Users(
+            $this,
+            "Users",
+            array(
+                'methods' => array(
+                    'getUserByUsername' => array(
+                        'path'        => 'users/:user',
+                        'httpMethod'  => HttpRequest::REQUEST_METHOD_GET,
+                        'requiresAuth'=> false,
+                        'parameters'  => array (
+                            'user'   => array (
+                                'type'      => 'string',
+                                'url_part'  => true,
+                            )
+                        )
+                    ),
+                    'getUser' => array(
+                        'path'        => 'user',
+                        'httpMethod'  => HttpRequest::REQUEST_METHOD_GET,
+                        'requiresAuth'=> true,
+                        'parameters'  => array()
+                    )
+                )
+            )
+        );
         $this->games = new Resource\Games(
             $this,
             "Games",
@@ -265,6 +290,70 @@ class Client
                             'offset' => array (
                                 'type' => 'integer',
                             )
+                        )
+                    )
+                )
+            )
+        );
+        $this->chat = new Resource\Chat(
+            $this,
+            "Chat",
+            array(
+                'methods' => array(
+                    'getChannelLinks' => array(
+                        'path'        => '/chat/:channel',
+                        'httpMethod'  => HttpRequest::REQUEST_METHOD_GET,
+                        'requiresAuth'=> false,
+                        'parameters'  => array (
+                            'channel'   => array (
+                                'type'      => 'string',
+                                'url_part'  => true,
+                            )
+                        )
+                    ),
+                    'getEmoticons' => array(
+                        'path'        => 'chat/emoticons',
+                        'httpMethod'  => HttpRequest::REQUEST_METHOD_GET,
+                        'requiresAuth'=> false,
+                        'parameters'  => array()
+                    ),
+                    'getChannelEmoticons' => array(
+                        'path'        => 'chat/:channel/emoticons',
+                        'httpMethod'  => HttpRequest::REQUEST_METHOD_GET,
+                        'requiresAuth'=> false,
+                        'parameters'  => array(
+                            'channel'   => array (
+                                'type'      => 'string',
+                                'url_part'  => true,
+                            )
+                        )
+                    ),
+                    'getChannelBadges' => array(
+                        'path'        => 'chat/:channel/badges',
+                        'httpMethod'  => HttpRequest::REQUEST_METHOD_GET,
+                        'requiresAuth'=> false,
+                        'parameters'  => array(
+                            'channel'   => array (
+                                'type'      => 'string',
+                                'url_part'  => true,
+                            )
+                        )
+                    ),
+                    'getEmoticonImages' => array(
+                        'path'        => 'chat/emoticon_images',
+                        'httpMethod'  => HttpRequest::REQUEST_METHOD_GET,
+                        'requiresAuth'=> false,
+                        'parameters'  => array()
+                    ),
+                    'getEmoticonSets' => array(
+                        'path'        => 'chat/emoticon_images/',
+                        'httpMethod'  => HttpRequest::REQUEST_METHOD_GET,
+                        'requiresAuth'=> false,
+                        'parameters'  => array(
+                            'emotesets'   => array (
+                                'type'     => 'integer',
+                                'required' => true,
+                            ),
                         )
                     )
                 )

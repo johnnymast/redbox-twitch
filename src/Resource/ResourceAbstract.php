@@ -42,7 +42,7 @@ class ResourceAbstract
         $this->methods       = isset($declaration['methods']) ? $declaration['methods'] : [];
 
         // If this line gives errros .. Comment it out because somewhere in the resource it self is an error.
-    //    $client->registerResource($this->resource_name, $this);
+      //  $client->registerResource($this->resource_name, $this);
         // Todo validate resources
     }
 
@@ -67,28 +67,29 @@ class ResourceAbstract
 
                             // Required
                             if (isset($options['required']) === true and $options['required'] === true and isset($args[$name]) === false)
-                                throw new Exception\RuntimeException($this->resource_name . ' requires parameter ' . $name . ' to be given for method ' . $method);
+                                throw new Exception\RuntimeException($this->resource_name.' requires parameter '.$name.' to be given for method '.$method_name);
 
                             // Min
                             if (isset($options['min']) === true and (isset($args[$name]) === true and $args[$name] < $options['min']))
-                                throw new Exception\RuntimeException($this->resource_name . ' requires parameter ' . $name . ' to have a minimum value of ' . $options['min'] . ' for method ' . $method);
+                                throw new Exception\RuntimeException($this->resource_name . ' requires parameter ' . $name . ' to have a minimum value of ' . $options['min'] . ' for method ' . $method_name);
 
                             // Min
                             if (isset($options['max']) === true and (isset($args[$name]) === true and $args[$name] > $options['max']))
-                                throw new Exception\RuntimeException($this->resource_name . ' requires parameter ' . $name . ' to have a maximum value of ' . $options['min'] . ' for method ' . $method);
+                                throw new Exception\RuntimeException($this->resource_name . ' requires parameter ' . $name . ' to have a maximum value of ' . $options['min'] . ' for method ' . $method_name);
+
 
                             break;
                         case 'string':
 
                             // Required
                             if (isset($options['required']) === true and $options['required'] === true and isset($args[$name]) === false)
-                                throw new Exception\RuntimeException($this->resource_name . ' requires parameter ' . $name . ' to be given for method ' . $method);
+                                throw new Exception\RuntimeException($this->resource_name . ' requires parameter ' . $name . ' to be given for method ' . $method_name);
 
                             // todo add validator for restricted_value
 
                             // Url Part
                             if (isset($options['url_part']) === true and $options['url_part'] === true and isset($args[$name]) === false) {
-                                throw new Exception\RuntimeException($this->resource_name . ' requires parameter ' . $name . ' to be given for method ' . $method);
+                                throw new Exception\RuntimeException($this->resource_name . ' requires parameter ' . $name . ' to be given for method ' . $method_name);
                             } else if (isset($options['url_part']) === true and $options['url_part'] == true and isset($args[$name]) === true) {
                                 $this->url_parts[$method_name][':' . $name] = array('name' => $name, 'value' => $args[$name]);
                             }
@@ -146,6 +147,7 @@ class ResourceAbstract
                 next($arguments);
                 $count++;
             }
+
 
             $request = new HttpRequest(
                 $url,

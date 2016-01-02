@@ -67,6 +67,7 @@ class Curl implements AdapterInterface
      */
     public function send($address, $method, $headers = null, $body = null)
     {
+
         // Set connection options
         curl_setopt($this->curl, CURLOPT_URL, $address);
         curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, $method);
