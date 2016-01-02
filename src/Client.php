@@ -38,7 +38,7 @@ class Client
      */
     protected $access_token;
 
-    /*
+    /**
      * @var string
      */
     protected $api_url;
@@ -79,6 +79,16 @@ class Client
      * @var Resource\Ingests
      */
     public $ingests;
+
+    /**
+     * @var Resource\Users
+     */
+    public $users;
+
+    /**
+     * @var Resource\Chat
+     */
+    public $chat;
 
     /**
      * Client constructor.

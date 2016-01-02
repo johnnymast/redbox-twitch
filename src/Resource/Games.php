@@ -1,6 +1,6 @@
 <?php
 namespace Redbox\Twitch\Resource;
-use Redbox\Twitch\Game;
+use Redbox\Twitch;
 
 class Games extends ResourceAbstract {
 
