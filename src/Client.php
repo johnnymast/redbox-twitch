@@ -1,10 +1,9 @@
 <?php
 namespace Redbox\Twitch;
-use Redbox\Twitch\Transport\TransportInterface;
-use Redbox\Twitch\Transport\HttpRequest;
-use Redbox\Twitch\Transport\Http;
-use Redbox\Twitch\Commands;
 use Redbox\Twitch\Auth\AuthModel;
+use Redbox\Twitch\Transport\Http;
+use Redbox\Twitch\Transport\HttpRequest;
+use Redbox\Twitch\Transport\TransportInterface;
 
 class Client
 {

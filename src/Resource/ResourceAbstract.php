@@ -1,9 +1,9 @@
 <?php
 namespace Redbox\Twitch\Resource;
-use Redbox\Twitch\Exception;
-use Redbox\Twitch\Client;
-use Redbox\Twitch\Transport\HttpRequest;
 use Redbox\Twitch;
+use Redbox\Twitch\Client;
+use Redbox\Twitch\Exception;
+use Redbox\Twitch\Transport\HttpRequest;
 
 class ResourceAbstract
 {
