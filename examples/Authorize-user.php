@@ -31,7 +31,7 @@ $state = session_id();
 $url = $twitch->getAuthModel()->createAuthUrl(Scope::generate(array(Scope::SCOPE_USER_READ)), $state);
 
 
-if ($token->isValid() == false) {
+if ($token->isValid() === false) {
     echo 'You are not authorized, you should click <a href="'.$url.'">This link</a> to authorize your self. Please note you will not return to this script in fact you will return to '.$config['twitch_redirect_uri'];
 } else {
     echo 'You are correctly authorized';
