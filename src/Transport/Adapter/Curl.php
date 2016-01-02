@@ -1,6 +1,5 @@
 <?php
 namespace Redbox\Twitch\Transport\Adapter;
-use Redbox\Twitch\Client;
 
 class Curl implements AdapterInterface
 {
@@ -8,6 +7,16 @@ class Curl implements AdapterInterface
      * @var resource
      */
     protected $curl;
+
+    /**
+     * @var int
+     */
+    protected $timeout = 30;
+
+    /**
+     * @var int
+     */
+    protected $connect_timeout = 30;
 
     /**
      * Verify that we can support the curl extention.
@@ -54,15 +63,25 @@ class Curl implements AdapterInterface
      * @param null $body
      * @return mixed
      */
-    public function send($address, $method, $body = null)
+    public function send($address, $method, $headers = null, $body = null)
     {
         // Set connection options
         curl_setopt($this->curl, CURLOPT_URL, $address);
         curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, $method);
         curl_setopt($this->curl, CURLOPT_HEADER, false);
         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
-        if (strlen($body)) {
-            curl_setopt($this->curl, CURLOPT_POSTFIELDS, $body);
+
+        if (is_array($headers)) {
+            $curlHeaders = array();
+            foreach ($headers as $k => $v) {
+                $curlHeaders[] = "$k: $v";
+            }
+            curl_setopt($this->curl, CURLOPT_HTTPHEADER, $curlHeaders);
+        }
+
+        if (is_array($body) == true and count($body) > 0) {
+            echo count($body); print_r($body);
+      //      curl_setopt($this->curl, CURLOPT_POSTFIELDS, $body);
         }
         return curl_exec($this->curl);
     }

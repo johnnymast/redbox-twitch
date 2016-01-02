@@ -1,16 +1,39 @@
 <?php
 namespace Redbox\Twitch;
 
-class Token {
+class Root {
 
     /**
      * @var string
      */
     protected $user_name;
+
     /**
      * @var bool
      */
     protected $valid;
+
+    /**
+     * @return Authorization
+     */
+    public function getAuthorization()
+    {
+        return $this->authorization;
+    }
+
+    /**
+     * @param Authorization $authorization
+     */
+    public function setAuthorization($authorization)
+    {
+        $this->authorization = $authorization;
+    }
+
+    /**
+     * @var Authorization
+     */
+    protected $authorization;
+
 
     /**
      * @return string

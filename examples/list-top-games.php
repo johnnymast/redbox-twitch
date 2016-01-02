@@ -4,35 +4,25 @@ require 'config.php';
 
 use Redbox\Twitch;
 
-$twitch = new Redbox\Twitch\Client();
-$games = $twitch->getTopGames();
+try {
 
-/**
- * Output the changes since index action.
- */
-if(php_sapi_name() == "cli") {
+    $twitch = new Redbox\Twitch\Client();
+    $games = $twitch->games->listTopGames();
 
-    echo "New files\n\n";
-    foreach ($report->getNewfiles() as $file) {
-        echo $file->getFilename().' '.Redbox\Scan\Filesystem\FileInfo::getFileHash($file->getRealPath())."\n";
-    }
 
-    echo "\nModified Files\n\n";
-    foreach ($report->getModifiedFiles() as $file) {
-        echo $file->getFilename().' '.Redbox\Scan\Filesystem\FileInfo::getFileHash($file->getRealPath())."\n";
-    }
-    echo "\n";
+// TODO: add pagination ...
 
-} else {
-    echo '<h1>New files</h1>';
-    foreach ($report->getNewfiles() as $file) {
-        echo '<li>'.$file->getFilename().' '.Redbox\Scan\Filesystem\FileInfo::getFileHash($file->getRealPath()).'</li>';
+    /**
+     * Output the changes since index action.
+     */
+
+    echo '<h1>Top games</h1>';
+    foreach ($games as $game) {
+        echo '<li><img src="'.$game->getBoxSmall().'" /> '.$game->getName().' Is being streamed by '.$game->getChannels()." channels with ".$game->getViewers()." combined viewers</li>";
     }
     echo '</ul>';
 
-    echo '<h1>Modified Files</h1>';
-    foreach ($report->getModifiedFiles() as $file) {
-        echo '<li>'.$file->getFilename().' '.Redbox\Scan\Filesystem\FileInfo::getFileHash($file->getRealPath()).'</li>';
-    }
-    echo '</ul>';
+} catch (Exception $e) {
+    print '<pre>';
+    print_r($e);
 }

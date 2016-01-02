@@ -19,7 +19,7 @@ class Stream implements AdapterInterface
         // TODO: Implement disconnect() method.
     }
 
-    public function send($address, $method, $body = null)
+    public function send($address, $method, $headers = null, $body = null)
     {
         // TODO: Implement send() method.
     }

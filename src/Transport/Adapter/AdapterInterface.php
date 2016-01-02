@@ -31,7 +31,7 @@ interface AdapterInterface
      * @param null $body
      * @return mixed
      */
-    public function send($address, $method, $body = null);
+    public function send($address, $method, $headers = null, $body = null);
 
     /**
      * @return mixed

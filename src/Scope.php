@@ -1,6 +1,9 @@
 <?php
 namespace Redbox\Twitch;
 
+/*
+ * @depecated
+ */
 class Scope
 {
     const SCOPE_USER_READ            = 'user_read';
@@ -15,4 +18,13 @@ class Scope
     const USER_SUBSCRIPTIONS         = 'user_subscriptions';
     const CHANNEL_CHECK_SUBSCRIPTION = 'channel_check_subscription';
     const CHAT_LOGIN                 = 'chat_login';
+
+    static function generate($scopes = [])
+    {
+        $scps = [];
+        foreach ($scopes as $scope) {
+            $scps[] = $scope;
+        }
+        return trim(implode(' ', $scps));
+    }
 }

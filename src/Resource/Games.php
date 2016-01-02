@@ -1,24 +1,14 @@
 <?php
-namespace Redbox\Twitch\Commands;
-use Redbox\Twitch\Client;
+namespace Redbox\Twitch\Resource;
 use Redbox\Twitch\Game;
 
-class GetTopGames implements CommandInterface
-{
-    public function setRules()
-    {
-        // TODO: Implement setRules() method.
-    }
+class Games extends ResourceAbstract {
 
-    public function send(Client $client)
+    public function listTopGames($args = array())
     {
-        $response = $client->getTransport()->sendRequest(
-            "/games/top"
-        );
+        $response = $this->call('listTopGames', $args);
 
         $games = [];
-
-        // Experimental to the bone ...
 
         if (is_object($response) == true) {
             if (isset($response->top) == true) {
@@ -41,5 +31,4 @@ class GetTopGames implements CommandInterface
         }
         return $games;
     }
-
 }

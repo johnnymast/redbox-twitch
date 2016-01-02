@@ -1,5 +1,6 @@
 <?php
 namespace Redbox\Twitch\Transport;
+use Redbox\Twitch\Exception;
 use Redbox\Twitch\Transport\Adapter\Curl as DefaultAdapter;
 use Redbox\Twitch\Transport\Adapter;
 use Redbox\Twitch\Client;
@@ -57,27 +58,32 @@ class Http implements TransportInterface
     /* -- Getters -- */
 
 
-    public function sendRequest($path, $method = self::METHOD_GET, \stdClass $data = null)
+    public function sendRequest(HttpRequest $request)
     {
         if (!$this->client) {
-            // Throw
+            throw new Exception\TwitchException('Client was not set');
         }
 
-
-        $url = sprintf('%s/%s', $this->client->getApiUrl(), $path);
+        $apiurl = rtrim($this->client->getApiUrl(), '/');
+        $url = sprintf('%s/%s', $apiurl, $request->getUrl());
+        $url = rtrim($url, '/');
 
         $this->getAdapter()->open();
 
-        $data = $this->getAdapter()->send($url, $method, $data);
+        $data = $this->getAdapter()->send($url, $request->getRequestMethod(), $request->getRequestHeaders(), $request->getPostBody());
+        $status_code = $this->getAdapter()->getHttpStatusCode();
 
-        if ($this->getAdapter()->getHttpStatusCode() == 200) {
-            return json_decode($data);
-        }
-
+        $data =  json_decode($data);
 
         $this->getAdapter()->close();
 
-        print '<pre>';
-        print_r($data);
+        // TODO we need to return more info
+        if ($status_code !== 200) {
+            throw new Exception\TwitchException(
+                $data->error,
+                $data->status
+            );
+        }
+        return $data;
     }
 }
