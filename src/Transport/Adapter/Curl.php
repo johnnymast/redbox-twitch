@@ -82,7 +82,7 @@ class Curl implements AdapterInterface
             curl_setopt($this->curl, CURLOPT_HTTPHEADER, $curlHeaders);
         }
 
-        if (is_array($body) == true and count($body) > 0) {
+        if (is_array($body) === true && count($body) > 0) {
             curl_setopt($this->curl, CURLOPT_POSTFIELDS, $body);
         }
         return curl_exec($this->curl);

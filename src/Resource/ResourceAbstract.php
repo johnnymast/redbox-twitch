@@ -66,7 +66,7 @@ class ResourceAbstract
                             // todo implment default value as seen in team
 
                             // Required
-                            if (isset($options['required']) === true and $options['required'] === true and isset($args[$name]) == false)
+                            if (isset($options['required']) === true and $options['required'] === true and isset($args[$name]) === false)
                                 throw new Exception\RuntimeException($this->resource_name . ' requires parameter ' . $name . ' to be given for method ' . $method);
 
                             // Min
@@ -112,15 +112,15 @@ class ResourceAbstract
      */
     public function call($method, $arguments = array(), $body = array())
     {
-        if ($this->validate_arguments($method, $arguments) == true)
+        if ($this->validate_arguments($method, $arguments) === true)
         {
 
             $headers = array();
             $headers['Accept']    = 'application/vnd.twitchtv.v3+json';
             $headers['Client-ID'] = $this->client->getClientId();
 
-            if (isset($this->methods[$method]['requiresAuth']) == true) {
-                if ($this->methods[$method]['requiresAuth'] == true && !$this->client->getAccessToken()) {
+            if (isset($this->methods[$method]['requiresAuth']) === true) {
+                if ($this->methods[$method]['requiresAuth'] === true && !$this->client->getAccessToken()) {
                     throw new Exception\AuthorizationRequiredException('Method: '.$method.' requires authorization. Did you forget to use setAccessToken() ?');
                 }
             }
@@ -129,7 +129,7 @@ class ResourceAbstract
                 $headers['Authorization'] = 'OAuth ' . $this->client->getAccessToken();
 
 
-            if (isset($this->url_parts[$method]) == true and is_array($this->url_parts[$method]) == true) {
+            if (isset($this->url_parts[$method]) === true and is_array($this->url_parts[$method]) === true) {
                 if (count($this->url_parts[$method]) > 0) {
                     foreach ($this->url_parts[$method] as $key => $url_part) {
                         $this->methods[$method]['path'] = str_replace($key, $url_part['value'], $this->methods[$method]['path']);

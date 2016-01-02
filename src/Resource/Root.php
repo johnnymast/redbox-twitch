@@ -15,7 +15,7 @@ class Root extends ResourceAbstract {
 
                 $root->setValid($response->token->valid);
 
-                if ($root->isValid() == true && isset($response->token->authorization) === true) {
+                if ($root->isValid() === true && isset($response->token->authorization) === true) {
                     $root->setUserName($response->token->user_name);
                     $authorization = new Twitch\Authorization;
                     $authorization->setScopes($response->token->authorization->scopes);
