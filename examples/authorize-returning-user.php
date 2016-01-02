@@ -3,6 +3,8 @@ require '../vendor/autoload.php';
 require 'config.php';
 
 use Redbox\Twitch;
+error_reporting(E_ALL);
+ini_set('display_errors', true);
 
 try {
 
@@ -23,13 +25,12 @@ try {
             ->setRedirectUri($config['twitch_redirect_uri'])
             ->setForceRelogin($config['twitch_force_login']);
 
-        if ($response = $twitch->requestAccessToken($code, $state)) {
+        if ($response = $twitch->auth->requestAccessToken($code, $state)) {
             $_SESSION['access_token'] = $response->getAccessToken();
             echo 'It looks like it all worked out. <a href="get-root.php">Check how get-root looks like now</a> OR <a href="authorize-user.php">Check if your authenticated in authorize-user.php</a>';
         } else {
             die('Die oops something wend wrong.');
         }
-
 
     } else {
         echo '<h1>Oops something went wrong</h1>';

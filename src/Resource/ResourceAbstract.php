@@ -78,13 +78,12 @@ class ResourceAbstract
                             break;
                     }
                 }
-                return true;
             }
         }
-        return false;
+        return true;
     }
 
-    public function call($method, $arguments = array())
+    public function call($method, $arguments = array(), $body = array())
     {
         if ($this->validate_arguments($method, $arguments) == true)
         {
@@ -116,7 +115,7 @@ class ResourceAbstract
                 '/'.$this->methods[$method]['path'],
                 $this->methods[$method]['httpMethod'],
                 $headers,
-                $arguments
+                $body
             );
 
             $response = $this->client->getTransport()->sendRequest(
@@ -125,6 +124,10 @@ class ResourceAbstract
 
             return $response;
         }
+    }
+
+    public function getClient() {
+        return $this->client;
     }
 
     public function getResourceName() {

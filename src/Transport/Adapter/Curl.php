@@ -55,11 +55,13 @@ class Curl implements AdapterInterface
         }
     }
 
+
     /**
      * Send the request to the server.
      *
      * @param $address
      * @param $method
+     * @param null $headers
      * @param null $body
      * @return mixed
      */
@@ -70,6 +72,7 @@ class Curl implements AdapterInterface
         curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, $method);
         curl_setopt($this->curl, CURLOPT_HEADER, false);
         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($this->curl, CURLOPT_VERBOSE, true);
 
         if (is_array($headers)) {
             $curlHeaders = array();
@@ -80,8 +83,7 @@ class Curl implements AdapterInterface
         }
 
         if (is_array($body) == true and count($body) > 0) {
-            echo count($body); print_r($body);
-      //      curl_setopt($this->curl, CURLOPT_POSTFIELDS, $body);
+            curl_setopt($this->curl, CURLOPT_POSTFIELDS, $body);
         }
         return curl_exec($this->curl);
     }

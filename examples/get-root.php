@@ -11,7 +11,8 @@ try {
     if (isset($_SESSION['access_token']) == true) {
         $twitch->setAccessToken($_SESSION['access_token']);
     }
-    $root = $twitch->root->get();
+
+    $root = $twitch->root->getRoot();
 
     echo '<h1>ROOT</h1>';
     print '<pre>';

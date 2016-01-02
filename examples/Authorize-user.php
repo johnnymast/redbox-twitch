@@ -16,7 +16,7 @@ if (isset($_SESSION['access_token']) == true) {
 }
 
 // TODO change to getRoot()
-$token  = $twitch->root->get();
+$token  = $twitch->root->getRoot();
 
 /**
  * State is for defending XSS attacks.

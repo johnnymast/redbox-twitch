@@ -34,7 +34,6 @@ class Client
      */
     protected $force_relogin;
 
-
     /**
      * @var string
      */
@@ -51,6 +50,11 @@ class Client
      * @var array
      */
     protected $resources = [];
+
+    /**
+     * @var Resource\Auth
+     */
+    public $auth;
 
     /**
      * @var Resource\Game
@@ -80,6 +84,21 @@ class Client
     public function __construct()
     {
         $this->setApiUrl('https://api.twitch.tv/kraken');
+
+
+        $this->auth = new Resource\Auth(
+            $this,
+            "Auth",
+            array(
+                'methods' => array(
+                    'requestAccessToken' => array(
+                        'path'        => 'oauth2/token',
+                        'httpMethod'  => HttpRequest::REQUEST_METHOD_POST,
+                        'requiresAuth'=> false,
+                    )
+                )
+            )
+        );
         $this->games = new Resource\Games(
             $this,
             "Games",
@@ -108,7 +127,7 @@ class Client
             "Root",
             array(
                 'methods' => array(
-                    'get' => array(
+                    'getRoot' => array(
                         'path'        => '/',
                         'httpMethod'  => HttpRequest::REQUEST_METHOD_GET,
                         'requiresAuth'=> false,
@@ -348,30 +367,6 @@ class Client
     public function getAccessToken()
     {
         return $this->access_token;
-    }
-
-
-
-    /*  -- Commands -- */
-
-    public function getTopGames($limit = 10, $offset = 0)
-    {
-        return $this->sendCommand(
-            new Commands\GetTopGames($limit, $offset)
-        );
-    }
-
-    public function getRoot()
-    {
-        return $this->sendCommand(
-            new Commands\GetRoot
-        );
-    }
-
-    public function requestAccessToken($code = '', $state = '') {
-        return $this->sendCommand(
-            new Commands\RequestAccessToken($code, $state)
-        );
     }
 
     public function getAuthModel() {

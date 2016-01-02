@@ -4,7 +4,7 @@ use Redbox\Twitch;
 
 class Root extends ResourceAbstract {
 
-    public function get($args = array())
+    public function getRoot($args = array())
     {
         $response = $this->call('get', $args);
 
@@ -17,7 +17,7 @@ class Root extends ResourceAbstract {
 
                 if ($root->isValid() == true && isset($response->token->authorization) == true) {
                     $root->setUserName($response->token->user_name);
-                    $authorization = new Authorization;
+                    $authorization = new Twitch\Authorization;
                     $authorization->setScopes($response->token->authorization->scopes);
                     $authorization->setCreatedAt($response->token->authorization->created_at);
                     $authorization->setUpdatedAt($response->token->authorization->created_at);
