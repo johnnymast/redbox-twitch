@@ -13,7 +13,7 @@ class Http implements TransportInterface
     protected $client;
 
     /**
-     * @var AdapterInterface
+     * @var Adapter\AdapterInterface
      */
     protected $adapter;
 
@@ -36,7 +36,7 @@ class Http implements TransportInterface
          * Not a adapter throws a BadFunctionCallException or true
          * if usable.
          */
-        if ($adapter->verifySupport() == true) {
+        if ($adapter->verifySupport() === true) {
             $this->adapter = $adapter;
         }
     }

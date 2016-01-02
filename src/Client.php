@@ -228,7 +228,7 @@ class Client
                             )
                         )
                     ),
-                    'getChannelVideos' => array(
+                    'listChannelVideos' => array(
                         'path'        => 'channels/:channel/videos',
                         'httpMethod'  => HttpRequest::REQUEST_METHOD_GET,
                         'requiresAuth'=> false,
@@ -250,6 +250,21 @@ class Client
                             'channel'   => array (
                                 'type'      => 'string',
                                 'url_part'  => true,
+                            )
+                        )
+                    ),
+                    'listVideosFollowed' => array(
+                        'path'        => 'videos/followed',
+                        'httpMethod'  => HttpRequest::REQUEST_METHOD_GET,
+                        'requiresAuth'=> true,
+                        'parameters'  => array (
+                            'limit'   => array (
+                                'type'    => 'integer',
+                                'min'     => 0,
+                                'max'     => 100,
+                            ),
+                            'offset' => array (
+                                'type' => 'integer',
                             )
                         )
                     )

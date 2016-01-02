@@ -10,7 +10,7 @@ class Teams extends ResourceAbstract
 
         $teams = [];
 
-        if (is_object($response) == true) {
+        if (is_object($response) === true) {
             if (isset($response->teams)) {
                 foreach($response->teams as $tm) {
                     $team = new Twitch\Team;

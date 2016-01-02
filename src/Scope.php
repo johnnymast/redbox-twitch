@@ -19,7 +19,7 @@ class Scope
     const CHANNEL_CHECK_SUBSCRIPTION = 'channel_check_subscription';
     const CHAT_LOGIN                 = 'chat_login';
 
-    static function generate($scopes = [])
+    public static function generate($scopes = [])
     {
         $scps = [];
         foreach ($scopes as $scope) {

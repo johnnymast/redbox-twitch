@@ -10,8 +10,8 @@ class Videos extends ResourceAbstract
 
         $videos = [];
 
-        if (is_object($response) == true) {
-            if (isset($response->videos) == true) {
+        if (is_object($response) === true) {
+            if (isset($response->videos) === true) {
                 foreach($response->videos as $vid) {
                     $video = new Twitch\Video();
                     $video->setTitle($vid->title);
@@ -75,14 +75,14 @@ class Videos extends ResourceAbstract
         return false;
     }
 
-    public function getChannelVideos($args = array())
+    public function listChannelVideos($args = array())
     {
-        $response = $this->call('getChannelVideos', $args);
+        $response = $this->call('listChannelVideos', $args);
 
         $videos = [];
 
-        if (is_object($response) == true) {
-            if (isset($response->videos) == true) {
+        if (is_object($response) === true) {
+            if (isset($response->videos) === true) {
                 foreach($response->videos as $vid) {
                     $video = new Twitch\Video();
                     $video->setTitle($vid->title);
@@ -113,12 +113,41 @@ class Videos extends ResourceAbstract
         return $videos;
     }
 
-    public function getVideosFollowed($args = array())
+    public function listVideosFollowed($args = array())
     {
-        $response = $this->call('getChannelVideos', $args);
+        $response = $this->call('listVideosFollowed', $args);
 
-        print_r($response);
-        exit;
+        $videos = [];
 
+        if (isset($response->videos) === true) {
+            foreach($response->videos as $vid) {
+
+                $video = new Twitch\Video();
+                $video->setTitle($vid->title);
+                $video->setDescription($vid->description);
+                $video->setBroadcastId($vid->broadcast_id);
+                $video->setStatus($vid->status);
+                $video->setTagList($vid->tag_list);
+                $video->setRecordedAt($vid->recorded_at);
+                $video->setGame($vid->game);
+                $video->setLength($vid->length);
+                $video->setDeleteAt($vid->delete_at);
+                $video->setVodType($vid->vod_type);
+                $video->setIsMuted($vid->is_muted);
+                $video->setPreview($vid->preview);
+                $video->setThumbnails($vid->thumbnails);
+                $video->setResolutions($vid->resolutions);
+                $video->setBroadcastType($vid->broadcast_type);
+                $video->setCreatedAt($vid->created_at);
+                $video->setChannel($vid->channel);
+                $video->setFps($vid->fps);
+                $video->setViews($vid->views);
+                $video->setUrl($vid->url);
+                $video->setId($vid->_id);
+                $videos[] = $video;
+            }
+        }
+
+        return $videos;
     }
 }

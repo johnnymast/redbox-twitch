@@ -10,8 +10,8 @@ class Ingests extends ResourceAbstract {
 
         $ingests = [];
 
-        if (is_object($response) == true) {
-            if (isset($response->ingests) == true) {
+        if (is_object($response) === true) {
+            if (isset($response->ingests) === true) {
                 foreach($response->ingests as $ing) {
                     $ingest = new Twitch\Ingest;
                     $ingest->setName($ing->name);

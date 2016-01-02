@@ -17,6 +17,7 @@ try {
      */
 
     echo '<h1>Top games</h1>';
+    echo '<ul>';
     foreach ($games as $game) {
         echo '<li><img src="'.$game->getBoxSmall().'" /> '.$game->getName().' Is being streamed by '.$game->getChannels()." channels with ".$game->getViewers()." combined viewers</li>";
     }

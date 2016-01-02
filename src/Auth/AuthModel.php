@@ -16,7 +16,7 @@ class AuthModel
 
     public function createAuthUrl($scopes = '', $state = null) {
         $addy = '';
-        if ($this->client->isForceRelogin() == true) {
+        if ($this->client->isForceRelogin() === true) {
             $addy .= '&force_verify=true';
         }
 
