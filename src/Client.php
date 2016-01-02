@@ -81,6 +81,9 @@ class Client
      */
     public $ingests;
 
+    /**
+     * Client constructor.
+     */
     public function __construct()
     {
         $this->setApiUrl('https://api.twitch.tv/kraken');
@@ -255,18 +258,27 @@ class Client
         );
     }
 
+    /**
+     * @param string $name
+     * @param Resource\ResourceAbstract $instance
+     */
     public function registerResource($name="", Resource\ResourceAbstract $instance) {
         $this->resources[$name] = $instance;
     }
 
+    /**
+     * @return array
+     */
     public function getSupportedFunctions() {
         return $this->resources;
     }
 
     /* -- Setters */
 
+
     /**
-     * @param string $client_id
+     * @param $client_id
+     * @return $this
      */
     public function setClientId($client_id)
     {
@@ -274,8 +286,10 @@ class Client
         return $this;
     }
 
+
     /**
-     * @param string $redirect_uri
+     * @param $redirect_uri
+     * @return $this
      */
     public function setRedirectUri($redirect_uri)
     {
@@ -283,8 +297,10 @@ class Client
         return $this;
     }
 
+
     /**
-     * @param string $client_secret
+     * @param $client_secret
+     * @return $this
      */
     public function setClientSecret($client_secret)
     {
@@ -292,8 +308,10 @@ class Client
         return $this;
     }
 
+
     /**
-     * @param string $api_url
+     * @param $api_url
+     * @return $this
      */
     public function setApiUrl($api_url)
     {
@@ -301,8 +319,10 @@ class Client
         return $this;
     }
 
+
     /**
-     * @param boolean $force_relogin
+     * @param $force_relogin
+     * @return $this
      */
     public function setForceRelogin($force_relogin)
     {
@@ -310,8 +330,9 @@ class Client
         return $this;
     }
 
+
     /**
-     * @param string $access_token
+     * @param $access_token
      */
     public function setAccessToken($access_token)
     {
@@ -369,20 +390,11 @@ class Client
         return $this->access_token;
     }
 
+    /**
+     * @return AuthModel
+     */
     public function getAuthModel() {
         return new AuthModel($this);
-    }
-
-    /**
-     * Send command to server
-     *
-     * @param CommandInterface $command Phue command
-     *
-     * @return mixed Command result
-     */
-    public function sendCommand(Commands\CommandInterface $command)
-    {
-        return $command->send($this);
     }
 
     /**
