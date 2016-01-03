@@ -3,6 +3,7 @@ require '../vendor/autoload.php';
 require 'config.php';
 
 use Redbox\Twitch;
+use Redbox\Twitch\Entity;
 
 try {
 
@@ -12,6 +13,10 @@ try {
         $twitch->setAccessToken($_SESSION['access_token']);
     }
 
+    $stream = new Entity\Stream;
+    $stream->setAbc('def');
+    echo 'Good: '.$stream->getAbc();
+    exit;
     $root = $twitch->root->getRoot();
 
     echo '<h1>ROOT</h1>';
