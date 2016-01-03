@@ -142,11 +142,10 @@ class ResourceAbstract
 
             $count = 0;
             while ($value = current($arguments)) {
-                $url .= (($count > 0) ? '&' : '?').key($arguments).'='.$value;
+                $url .= (($count > 0) ? '&' : '?').key($arguments).'='.urlencode($value);
                 next($arguments);
                 $count++;
             }
-
 
             $request = new HttpRequest(
                 $url,

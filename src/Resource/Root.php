@@ -6,7 +6,7 @@ class Root extends ResourceAbstract {
 
     public function getRoot($args = array())
     {
-        $response = $this->call('get', $args);
+        $response = $this->call('getRoot', $args);
 
         $root = new Twitch\Root;
 

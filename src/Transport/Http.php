@@ -68,6 +68,7 @@ class Http implements TransportInterface
         $url = sprintf('%s/%s', $apiurl, $request->getUrl());
         $url = rtrim($url, '/');
 
+
         $this->getAdapter()->open();
 
         $data = $this->getAdapter()->send($url, $request->getRequestMethod(), $request->getRequestHeaders(), $request->getPostBody());

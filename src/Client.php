@@ -91,6 +91,11 @@ class Client
     public $chat;
 
     /**
+     * @var Resource\Streams
+     */
+    public $streams;
+
+    /**
      * Client constructor.
      */
     public function __construct()
@@ -363,12 +368,114 @@ class Client
                             'emotesets'   => array (
                                 'type'     => 'integer',
                                 'required' => true,
-                            ),
+                            )
                         )
                     )
                 )
             )
         );
+        $this->streams = new Resource\Streams(
+            $this,
+            "Streams",
+            array(
+                'methods' => array(
+                    'getStreamByChannel' => array(
+                        'path'        => '/streams/:channel',
+                        'httpMethod'  => HttpRequest::REQUEST_METHOD_GET,
+                        'requiresAuth'=> false,
+                        'parameters'  => array (
+                            'channel'   => array (
+                                'type'      => 'string',
+                                'url_part'  => true,
+                            )
+                        )
+                    ),
+                    'getStreams' => array(
+                        'path'        => '/streams/',
+                        'httpMethod'  => HttpRequest::REQUEST_METHOD_GET,
+                        'requiresAuth'=> false,
+                        'parameters'  => array (
+                            'game'   => array (
+                                'type'      => 'string',
+                            ),
+                            'channel'   => array (
+                                'type'      => 'string',
+                            ),
+                            'limit'   => array (
+                                'type'      => 'integer',
+                                'min'       => 1,
+                                'max'       => 100,
+                                'default'   => 25,
+                            ),
+                            'offset'   => array (
+                                'type'      => 'integer',
+                                'default'   => 0,
+                            ),
+                            'client_id' => array(
+                                'type' => 'string',
+                            ),
+                            'stream_type' => array(
+                                'type' => 'string',
+                                'restricted_value' => array(
+                                    'all', 'playlist', 'live'
+                                )
+                            )
+                        )
+                    ),
+                    'getFeaturedStreams' => array(
+                        'path'        => '/streams/featured',
+                        'httpMethod'  => HttpRequest::REQUEST_METHOD_GET,
+                        'requiresAuth'=> false,
+                        'parameters'  => array (
+                            'limit'   => array (
+                                'type'      => 'integer',
+                                'min'       => 1,
+                                'max'       => 100,
+                                'default'   => 25,
+                            ),
+                            'offset'   => array (
+                                'type'      => 'integer',
+                                'default'   => 0,
+                            ),
+                        )
+                    ),
+                    'getStreamsSummary' => array(
+                        'path'        => '/streams/summary',
+                        'httpMethod'  => HttpRequest::REQUEST_METHOD_GET,
+                        'requiresAuth'=> false,
+                        'parameters'  => array (
+                            'game'   => array (
+                                'type'      => 'string'
+                            )
+                        )
+                    ),
+                    'getStreamsFollowed' => array(
+                        'path'        => '/streams/followed',
+                        'httpMethod'  => HttpRequest::REQUEST_METHOD_GET,
+                        'requiresAuth'=> true,
+                        'parameters'  => array (
+                            'limit'   => array (
+                                'type'      => 'integer',
+                                'min'       => 1,
+                                'max'       => 100,
+                                'default'   => 25,
+                            ),
+                            'offset'   => array (
+                                'type'      => 'integer',
+                                'default'   => 0,
+                            ),
+                            'stream_type' => array(
+                                'type' => 'string',
+                                'restricted_value' => array(
+                                    'all', 'playlist', 'live'
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        );
+
     }
 
     /**
