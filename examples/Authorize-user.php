@@ -28,7 +28,7 @@ $state = session_id();
 
 // TODO check without state if the flow still works ..
 
-$url = $twitch->getAuthModel()->createAuthUrl(Scope::generate(array(Scope::SCOPE_USER_READ)), $state);
+$url = $twitch->getAuthModel()->createAuthUrl(Scope::generate(array(Scope::SCOPE_USER_READ, Scope::CHANNEL_READ)), $state);
 
 
 if ($token->isValid() === false) {

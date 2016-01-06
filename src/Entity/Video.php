@@ -1,5 +1,5 @@
 <?php
-namespace Redbox\Twitch;
+namespace Redbox\Twitch\Entity;
 
 class Video
 {

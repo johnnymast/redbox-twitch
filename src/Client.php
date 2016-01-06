@@ -39,6 +39,11 @@ class Client
     protected $access_token;
 
     /**
+     * @var array
+     */
+    protected $scope = [];
+
+    /**
      * @var string
      */
     protected $api_url;
@@ -96,6 +101,11 @@ class Client
     public $streams;
 
     /**
+     * @var Resource\Channels
+     */
+    public $channels;
+
+    /**
      * Client constructor.
      */
     public function __construct()
@@ -109,9 +119,10 @@ class Client
             array(
                 'methods' => array(
                     'requestAccessToken' => array(
-                        'path'        => 'oauth2/token',
-                        'httpMethod'  => HttpRequest::REQUEST_METHOD_POST,
-                        'requiresAuth'=> false,
+                        'path'         => 'oauth2/token',
+                        'httpMethod'   => HttpRequest::REQUEST_METHOD_POST,
+                        'requiresAuth' => false,
+                        'requireScope' => array(),
                     )
                 )
             )
@@ -170,10 +181,11 @@ class Client
             array(
                 'methods' => array(
                     'getRoot' => array(
-                        'path'        => '/',
-                        'httpMethod'  => HttpRequest::REQUEST_METHOD_GET,
-                        'requiresAuth'=> false,
-                        'parameters'  => array()
+                        'path'         => '/',
+                        'httpMethod'   => HttpRequest::REQUEST_METHOD_GET,
+                        'requiresAuth' => false,
+                        'requireScope' => array(),
+                        'parameters'   => array()
                     )
                 )
             )
@@ -192,7 +204,6 @@ class Client
                 )
             )
         );
-
         $this->teams = new Resource\Teams(
             $this,
             "Teams",
@@ -267,6 +278,7 @@ class Client
                             )
                         )
                     ),
+                    /* @ depricated */
                     'listChannelVideos' => array(
                         'path'        => 'channels/:channel/videos',
                         'httpMethod'  => HttpRequest::REQUEST_METHOD_GET,
@@ -475,7 +487,93 @@ class Client
                 )
             )
         );
-
+        $this->channels = new Resource\Channels(
+            $this,
+            "Channels",
+            array(
+                'methods' => array(
+                    'getChannel' => array(
+                        'path'         => 'channel',
+                        'httpMethod'   => HttpRequest::REQUEST_METHOD_GET,
+                        'requiresAuth' => true,
+                        'requireScope' => array(Scope::CHANNEL_READ),
+                        'parameters'   => array (),
+                    ),
+                    'getChannelByName' => array(
+                        'path'         => 'channels/:channel',
+                        'httpMethod'   => HttpRequest::REQUEST_METHOD_GET,
+                        'requiresAuth' => false,
+                        'requireScope' => array(Scope::CHANNEL_READ),
+                        'parameters'   => array(
+                            'channel'   => array (
+                                'type'      => 'string',
+                                'url_part'  => true,
+                            )
+                        ),
+                    ),
+                    'getChannelVideos' => array(
+                        'path'         => 'channels/:channel/videos',
+                        'httpMethod'   => HttpRequest::REQUEST_METHOD_GET,
+                        'requireScope' => array(),
+                        'requiresAuth' => false,
+                        'requireScope' => array(),
+                        'parameters'   => array (
+                            'limit'    => array (
+                                'type'    => 'integer',
+                                'min'     => 0,
+                                'max'     => 100,
+                            ),
+                            'offset' => array (
+                                'type' => 'integer',
+                            ),
+                            'broadcasts' => array (
+                                'type' => 'bool',
+                            ),
+                            'hls' => array(
+                                'type' => 'bool'
+                            ),
+                            'channel'   => array (
+                                'type'      => 'string',
+                                'url_part'  => true,
+                            )
+                        )
+                    ),
+                    'getChannelEditors' => array(
+                        'path'         => 'channels/:channel/editors',
+                        'httpMethod'   => HttpRequest::REQUEST_METHOD_GET,
+                        'requiresAuth' => true,
+                        'requireScope' => array(Scope::CHANNEL_READ),
+                        'parameters'   => array(
+                            'channel'   => array (
+                                'type'      => 'string',
+                                'url_part'  => true,
+                            )
+                        ),
+                    ),
+                    'updateChannelByName' => array(
+                        'path'         => 'channels/:channel',
+                        'httpMethod'   => HttpRequest::REQUEST_METHOD_GET,
+                        'requiresAuth' => false,
+                        'requireScope' => array(Scope::CHANNEL_EDITOR),
+                        'parameters'   => array(
+                            'channel'   => array (
+                                'type'      => 'string',
+                                'url_part'  => true,
+                            ),
+                            'status'    => array (
+                                'type'    => 'string',
+                            ),
+                            'game'    => array (
+                                'type'    => 'string',
+                            ),
+                            'delay'    => array (
+                                'type'    => 'string',
+                            )
+                        )
+                    ),
+                )
+            )
+        );
     }
 
     /**
@@ -559,6 +657,14 @@ class Client
         $this->access_token = $access_token;
     }
 
+    /**
+     * @param array $scope
+     */
+    public function setScope($scope)
+    {
+        $this->scope = $scope;
+    }
+
 
     /* -- Getters  */
 
@@ -609,6 +715,16 @@ class Client
     {
         return $this->access_token;
     }
+
+    /**
+     * @return array
+     */
+    public function getScope()
+    {
+        return $this->scope;
+    }
+
+
 
     /**
      * @return AuthModel

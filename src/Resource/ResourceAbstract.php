@@ -125,6 +125,20 @@ class ResourceAbstract
                 }
             }
 
+            if (isset($this->methods[$method]['requireScope']) == false) {
+                /* Should the be an auth exception ? */
+                throw new Exception\AuthorizationRequiredException('Method: '.$method.' did not set define any scope.');
+            } else {
+                $client_scope = $this->getClient()->getScope();
+                $required_scope = $this->methods[$method]['requireScope'];
+                foreach($required_scope as $scope) {
+                    if (in_array($scope, $client_scope) == false) {
+                        throw new Exception\AuthorizationRequiredException('Method: '.$method.' requires scope: '.$scope.' to be set.');
+                    }
+                }
+
+            }
+
             if ($this->client->getAccessToken())
                 $headers['Authorization'] = 'OAuth ' . $this->client->getAccessToken();
 

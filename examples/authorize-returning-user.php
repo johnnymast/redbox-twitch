@@ -27,6 +27,7 @@ try {
 
         if ($response = $twitch->auth->requestAccessToken($code, $state)) {
             $_SESSION['access_token'] = $response->getAccessToken();
+            $_SESSION['scope']        = $response->getScope();
             echo 'It looks like it all worked out. <a href="get-root.php">Check how get-root looks like now</a> OR <a href="authorize-user.php">Check if your authenticated in authorize-user.php</a>';
         } else {
             die('Die oops something wend wrong.');
